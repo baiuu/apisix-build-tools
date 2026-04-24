@@ -57,7 +57,7 @@ if [ "$repo" == apisix-nginx-module ]; then
     cp -r "$prev_workdir" ./apisix-nginx-module-${apisix_nginx_module_ver}
 else
     git clone --depth=1 -b $apisix_nginx_module_ver \
-        https://github.com/api7/apisix-nginx-module.git \
+        https://github.com/baiuu/apisix-nginx-module.git \
         apisix-nginx-module-${apisix_nginx_module_ver}
 fi
 

@@ -1,5 +1,5 @@
 # apisix systemd service
-# https://github.com/api7/apisix-build-tools/blob/master/usr/lib/systemd/system/apisix.service
+# https://github.com/baiuu/apisix-build-tools/blob/master/usr/lib/systemd/system/apisix.service
 [Unit]
 Description=apisix
 #Conflicts=apisix.service

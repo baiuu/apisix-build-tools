@@ -24,7 +24,7 @@ OPENSSL_VERSION=${OPENSSL_VERSION:-"3.4.1"}
 OPENRESTY_VERSION="1.27.1.2"
 ngx_multi_upstream_module_ver="1.3.2"
 mod_dubbo_ver="1.0.2"
-apisix_nginx_module_ver="1.19.3"
+apisix_nginx_module_ver="1.19.3-add"
 wasm_nginx_module_ver="0.7.0"
 lua_var_nginx_module_ver="v0.5.3"
 lua_resty_events_ver="0.2.0"
@@ -107,7 +107,7 @@ if [ "$repo" == apisix-nginx-module ]; then
     cp -r "$prev_workdir" ./apisix-nginx-module-${apisix_nginx_module_ver}
 else
     git clone --depth=1 -b $apisix_nginx_module_ver \
-        https://github.com/api7/apisix-nginx-module.git \
+        https://github.com/baiuu/apisix-nginx-module.git \
         apisix-nginx-module-${apisix_nginx_module_ver}
 fi
 
