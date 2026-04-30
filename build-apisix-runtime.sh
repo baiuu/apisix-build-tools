@@ -24,7 +24,7 @@ OPENSSL_VERSION=${OPENSSL_VERSION:-"3.4.1"}
 OPENRESTY_VERSION="1.27.1.2"
 ngx_multi_upstream_module_ver="1.3.2"
 mod_dubbo_ver="1.0.2"
-apisix_nginx_module_ver="1.19.3-add-fix"
+apisix_nginx_module_ver="1.19.3-pd"
 wasm_nginx_module_ver="0.7.0"
 lua_var_nginx_module_ver="v0.5.3"
 lua_resty_events_ver="0.2.0"
@@ -37,7 +37,7 @@ install_openssl_3(){
     fi
     # required for openssl 3.x config
     cpanm IPC/Cmd.pm
-    wget --no-check-certificate https://github.com/openssl/openssl/releases/download/openssl-${OPENSSL_VERSION}/openssl-${OPENSSL_VERSION}.tar.gz
+    wget --no-check-certificate https://gh.felicity.ac.cn/https://github.com/openssl/openssl/releases/download/openssl-${OPENSSL_VERSION}/openssl-${OPENSSL_VERSION}.tar.gz
     tar xvf openssl-${OPENSSL_VERSION}.tar.gz
     cd openssl-${OPENSSL_VERSION}/
     export LDFLAGS="-Wl,-rpath,$zlib_prefix/lib:$OPENSSL_PREFIX/lib"
@@ -83,7 +83,7 @@ if [ "$repo" == lua-resty-events ]; then
     cp -r "$prev_workdir" ./lua-resty-events-${lua_resty_events_ver}
 else
     git clone --depth=1 -b $lua_resty_events_ver \
-        https://github.com/Kong/lua-resty-events.git \
+        https://gh.felicity.ac.cn/https://github.com/Kong/lua-resty-events.git \
         lua-resty-events-${lua_resty_events_ver}
 fi
 
@@ -91,7 +91,7 @@ if [ "$repo" == ngx_multi_upstream_module ]; then
     cp -r "$prev_workdir" ./ngx_multi_upstream_module-${ngx_multi_upstream_module_ver}
 else
     git clone --depth=1 -b $ngx_multi_upstream_module_ver \
-        https://github.com/api7/ngx_multi_upstream_module.git \
+        https://gh.felicity.ac.cn/https://github.com/api7/ngx_multi_upstream_module.git \
         ngx_multi_upstream_module-${ngx_multi_upstream_module_ver}
 fi
 
@@ -99,7 +99,7 @@ if [ "$repo" == mod_dubbo ]; then
     cp -r "$prev_workdir" ./mod_dubbo-${mod_dubbo_ver}
 else
     git clone --depth=1 -b $mod_dubbo_ver \
-        https://github.com/api7/mod_dubbo.git \
+        https://gh.felicity.ac.cn/https://github.com/api7/mod_dubbo.git \
         mod_dubbo-${mod_dubbo_ver}
 fi
 
@@ -107,7 +107,7 @@ if [ "$repo" == apisix-nginx-module ]; then
     cp -r "$prev_workdir" ./apisix-nginx-module-${apisix_nginx_module_ver}
 else
     git clone --depth=1 -b $apisix_nginx_module_ver \
-        https://github.com/baiuu/apisix-nginx-module.git \
+        https://gh.felicity.ac.cn/https://github.com/baiuu/apisix-nginx-module.git \
         apisix-nginx-module-${apisix_nginx_module_ver}
 fi
 
@@ -115,7 +115,7 @@ if [ "$repo" == wasm-nginx-module ]; then
     cp -r "$prev_workdir" ./wasm-nginx-module-${wasm_nginx_module_ver}
 else
     git clone --depth=1 -b $wasm_nginx_module_ver \
-        https://github.com/api7/wasm-nginx-module.git \
+        https://gh.felicity.ac.cn/https://github.com/api7/wasm-nginx-module.git \
         wasm-nginx-module-${wasm_nginx_module_ver}
 fi
 
@@ -123,7 +123,7 @@ if [ "$repo" == lua-var-nginx-module ]; then
     cp -r "$prev_workdir" ./lua-var-nginx-module-${lua_var_nginx_module_ver}
 else
     git clone --depth=1 -b $lua_var_nginx_module_ver \
-        https://github.com/api7/lua-var-nginx-module \
+        https://gh.felicity.ac.cn/https://github.com/api7/lua-var-nginx-module \
         lua-var-nginx-module-${lua_var_nginx_module_ver}
 fi
 
@@ -136,6 +136,7 @@ cd apisix-nginx-module-${apisix_nginx_module_ver}/patch || exit 1
 cd ../..
 
 cd wasm-nginx-module-${wasm_nginx_module_ver} || exit 1
+    sed -i 's|https://github.com/|https://gh.felicity.ac.cn/https://github.com/|g' install-wasmtime.sh
 ./install-wasmtime.sh
 cd ..
 
@@ -152,7 +153,7 @@ if [ ! -d "bundle/lua-resty-limit-traffic-$or_limit_ver" ]; then
 else
     rm -rf bundle/lua-resty-limit-traffic-$or_limit_ver
     limit_ver=1.2.0
-    wget "https://github.com/api7/lua-resty-limit-traffic/archive/refs/tags/v$limit_ver.tar.gz" -O "lua-resty-limit-traffic-$limit_ver.tar.gz"
+    wget "https://gh.felicity.ac.cn/https://github.com/api7/lua-resty-limit-traffic/archive/refs/tags/v$limit_ver.tar.gz" -O "lua-resty-limit-traffic-$limit_ver.tar.gz"
     tar -xzf lua-resty-limit-traffic-$limit_ver.tar.gz
     mv lua-resty-limit-traffic-$limit_ver bundle/lua-resty-limit-traffic-$or_limit_ver
 fi
@@ -229,7 +230,7 @@ if [[ $ARCH == "arm64" ]] || [[ $ARCH == "aarch64" ]]; then
     ETCD_ARCH="arm64"
 fi
 
-wget -q https://github.com/etcd-io/etcd/releases/download/v${ETCD_VERSION}/etcd-v${ETCD_VERSION}-linux-${ETCD_ARCH}.tar.gz
+wget -q https://gh.felicity.ac.cn/https://github.com/etcd-io/etcd/releases/download/v${ETCD_VERSION}/etcd-v${ETCD_VERSION}-linux-${ETCD_ARCH}.tar.gz
 tar xf etcd-v${ETCD_VERSION}-linux-${ETCD_ARCH}.tar.gz
 # ship etcdctl under the same bin dir of openresty so we can package it easily
 sudo cp etcd-v${ETCD_VERSION}-linux-${ETCD_ARCH}/etcdctl "$OR_PREFIX"/bin/
